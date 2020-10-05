@@ -5,7 +5,7 @@
 
 // Application import
 const app = require('./config/custom-express');
-const productRoutes = require('./app/routes/product.routes');
+const productsRoutes = require('./app/routes/products.routes');
 
 // Other variables
 const PORT = process.env.PORT || 8080;
