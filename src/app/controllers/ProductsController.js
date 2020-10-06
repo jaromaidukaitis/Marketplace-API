@@ -11,10 +11,20 @@ class ProductController {
 		};
 	}
 
+	static getAllProductsFromSupplier() {
+		return (req, res) => {
+			ProductModel.getAllProductsFromSupplier(req.params.id)
+				.then((row) => res.send(row))
+				.catch((err) =>
+					console.log('Request failed to return all products' + err)
+				);
+		};
+	}
+
 	static getOneProduct() {
 		return (req, res) => {
 			ProductModel.getOneProduct(req.params.id)
-				.then(() => res.send('Get one product ok'))
+				.then((row) => res.send(row))
 				.catch((err) =>
 					console.log('Request failed to return one product' + err)
 				);

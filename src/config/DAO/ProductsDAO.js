@@ -14,6 +14,21 @@ class ProductDao {
 		});
 	}
 
+	getAllProductsFromSupplier(id) {
+		return new Promise((resolve, reject) => {
+			this._db.all(
+				`SELECT * FROM products WHERE supplier_id = ?`,
+				[id],
+				(err, rows) => {
+					if (err) {
+						return reject(`not able to show products. Error: ${err}`);
+					}
+					return resolve(rows);
+				}
+			);
+		});
+	}
+
 	getOneProduct(id) {
 		return new Promise((resolve, reject) => {
 			this._db.all(`SELECT * FROM products WHERE id = ?`, [id], (err, row) => {
@@ -40,10 +55,10 @@ class ProductDao {
 		});
 	}
 
-	updateProduct(rating, name, description, price, in_stock, supplier_id) {
+	updateProduct(rating, name, description, price, in_stock, supplier_id, id) {
 		return new Promise((resolve, reject) => {
 			this._db.run(
-				`UPDATE product SET 
+				`UPDATE products SET 
 				rating = ?,
 				name = ?,
 				description = ?,
@@ -51,7 +66,7 @@ class ProductDao {
 				in_stock = ?,
 				supplier_id = ?
 				WHERE id = ?`,
-				[rating, name, description, price, in_stock, supplier_id],
+				[rating, name, description, price, in_stock, supplier_id, id],
 				(err) => {
 					if (err) {
 						return reject(`not able to update product. Error: ${err}`);
@@ -64,7 +79,7 @@ class ProductDao {
 
 	deleteProduct(id) {
 		return new Promise((resolve, reject) => {
-			this._db.run(`DELETE FROM products WHERE id = ?`[id], (err) => {
+			this._db.run(`DELETE FROM products WHERE id = ?`, [id], (err) => {
 				if (err) {
 					return reject(`not able to dele product. Error: ${err}`);
 				}
