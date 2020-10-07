@@ -13,11 +13,22 @@ class ProductController {
 
 	static getAllProductsFromSupplier() {
 		return (req, res) => {
-			ProductModel.getAllProductsFromSupplier(req.params.id)
-				.then((row) => res.send(row))
+			ProductModel.getAllProductsFromSupplier(req.params.supplier_id)
+				.then((rows) => res.send(rows))
 				.catch((err) =>
 					console.log('Request failed to return all products' + err)
 				);
+		};
+	}
+
+	static getOneProductFromSupplier() {
+		return (req, res) => {
+			ProductModel.getOneProductFromSupplier(
+				req.params.id,
+				req.params.supplier_id
+			)
+				.then((row) => res.send(row))
+				.catch((err) => console.log('Request failed to return products' + err));
 		};
 	}
 

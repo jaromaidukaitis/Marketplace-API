@@ -14,16 +14,31 @@ class ProductDao {
 		});
 	}
 
-	getAllProductsFromSupplier(id) {
+	getAllProductsFromSupplier(supplier_id) {
 		return new Promise((resolve, reject) => {
 			this._db.all(
 				`SELECT * FROM products WHERE supplier_id = ?`,
-				[id],
+				[supplier_id],
 				(err, rows) => {
 					if (err) {
 						return reject(`not able to show products. Error: ${err}`);
 					}
 					return resolve(rows);
+				}
+			);
+		});
+	}
+
+	getOneProductFromSupplier(id, supplier_id) {
+		return new Promise((resolve, reject) => {
+			this._db.all(
+				`SELECT * FROM products WHERE id = ? AND supplier_id = ?`,
+				[id, supplier_id],
+				(err, row) => {
+					if (err) {
+						return reject(`not able to show products. Error: ${err}`);
+					}
+					return resolve(row);
 				}
 			);
 		});

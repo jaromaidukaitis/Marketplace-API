@@ -6,8 +6,13 @@ module.exports = (app) => {
 	app.get('/products/:id', productController.getOneProduct());
 
 	app.get(
-		'/products-from-supplier/:id',
+		'/products-from-supplier/:supplier_id',
 		productController.getAllProductsFromSupplier()
+	);
+
+	app.get(
+		'/one-product-from-supplier/:id/:supplier_id',
+		productController.getOneProductFromSupplier()
 	);
 
 	app.post('/products', productController.addProduct());

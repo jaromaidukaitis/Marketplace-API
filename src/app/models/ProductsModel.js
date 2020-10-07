@@ -12,6 +12,14 @@ class ProductModel {
 		return instanceDao.getOneProduct(id);
 	}
 
+	static getAllProductsFromSupplier(supplier_id) {
+		return instanceDao.getAllProductsFromSupplier(supplier_id);
+	}
+
+	static getOneProductFromSupplier(id, supplier_id) {
+		return instanceDao.getOneProductFromSupplier(id, supplier_id);
+	}
+
 	static addProduct(rating, name, description, price, in_stock, supplier_id) {
 		return instanceDao.addProduct(
 			rating,
