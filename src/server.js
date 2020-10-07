@@ -5,9 +5,11 @@
 
 // Application import
 const app = require('./config/custom-express');
+const productsRoutes = require('./app/routes/products.routes');
 
 // Other variables
 const PORT = process.env.PORT || 8080;
+productsRoutes(app);
 
 // Server initialization
 app.listen(PORT, () => console.log(`Server Running on port ${PORT}`));
